@@ -1,20 +1,20 @@
-function createImg(data) {
+function createImageCard(data) {
     const gallery = document.querySelector('.gallery')
 
     const card = data.map(img => `<a href="${img.largeImageURL}"><div class="photo-card">
   <img src="${img.webformatURL}" alt="${img.tags}" loading="lazy" />
   <div class="info">
     <p class="info-item">
-      <b>${img.likes}</b>
+      <b>Likes:</b>${img.likes}
     </p>
     <p class="info-item">
-      <b>${img.views}</b>
+      <b>Views:</b>${img.views}
     </p>
     <p class="info-item">
-      <b>${img.comments}</b>
+      <b>Comments:</b>${img.comments}
     </p>
     <p class="info-item">
-      <b>${img.downloads}</b>
+      <b>Downloads:</b>${img.downloads}
     </p>
   </div>
 </div></a>`)
@@ -22,4 +22,4 @@ function createImg(data) {
     gallery.insertAdjacentHTML('beforeend', card)
 }
 
-export { createImg}
+export { createImageCard}

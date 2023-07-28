@@ -1,0 +1,64 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: cadetblue;
+}
+a {
+  text-decoration: none;
+}
+.load-more {
+  display: none;
+  margin: 20px auto;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+.photo-card img {
+  width: 270px;
+  height: 200px;
+}
+.photo-card {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  overflow: hidden;
+  cursor: pointer;
+}
+.info {
+  padding: 5px;
+  background-color: #ffaa00;
+}
+.info-item {
+  margin: 5px 0;
+  color: #000;
+}
+.search-form {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.search-form input {
+  padding: 10px 20px;
+  border: none;
+  font-size: 16px;
+  border-radius: 5px 0 0 5px;
+  border: 2px solid #aaa;
+}
+.search-form button {
+  border: none;
+  padding: 10px;
+  font-size: 16px;
+  margin-left: 2px;
+  background-color: #ffaa00;
+  color: #fff;
+  border-radius: 0 5px 5px 0;
+  cursor: pointer;
+}

@@ -1,31 +1,30 @@
-import { fetchImages } from "./api";
-import { createImg } from "./create";
+
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
+import { fetchImages } from './api.js';
+import { createImageCard } from './create.js';
 import { Loading, Notify } from 'notiflix';
 
-const selectors = {
-    form: document.querySelector(".search-form"),
-    gallery: document.querySelector('.gallery'),
-    loadMoreBtn: document.querySelector('.load-more')
-
-};
+const form = document.querySelector('.search-form');
+const imageDiv = document.querySelector('.gallery');
+const loadMoreBtn = document.querySelector('.load-more');
 
 let currentPage = 1;
 let searchQuery = '';
+
 let lb = new SimpleLightbox('.gallery a');
 
-selectors.form.addEventListener('submit', handleSubmit);
-selectors.loadMoreBtn.addEventListener('click', onLoadMore);
+form.addEventListener('submit', onSearch);
+loadMoreBtn.addEventListener('click', onLoadMore);
 
-async function handleSubmit(evt) {
-  evt.preventDefault();
-  selectors.loadMoreBtn.style.display = 'none';
-  searchQuery = selectors.form.elements.searchQuery.value.trim();
+async function onSearch(event) {
+  event.preventDefault();
+  loadMoreBtn.style.display = 'none';
+  searchQuery = form.elements.searchQuery.value.trim();
   if (searchQuery === '') return;
 
   currentPage = 1;
-  selectors.gallery.innerHTML = '';
+  imageDiv.innerHTML = '';
 
   Loading.hourglass();
 
@@ -38,7 +37,7 @@ async function handleSubmit(evt) {
       return;
     }
 
-    createImg(data.hits);
+    createImageCard(data.hits);
     Notify.success(`Hooray! We found ${data.totalHits} images.`);
     lb.refresh();
     showLoadMoreButton(data.totalHits);
@@ -55,7 +54,7 @@ async function onLoadMore() {
   Loading.hourglass('Loading more images...');
   try {
     const data = await fetchImages(searchQuery, currentPage);
-    createImg(data.hits);
+    createImageCard(data.hits);
     lb.refresh();
     const { height: cardHeight } = document
       .querySelector('.gallery')
